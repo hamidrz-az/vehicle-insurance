@@ -5,11 +5,12 @@ import * as z from "zod";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetVehicleTypesQuery } from "../api/vehicleApi";
-import InputField from "../components/UI/InputField";
-import Button from "../components/UI/Button";
+import InputField from "../components/common/InputField";
+import Button from "../components/common/Button";
 import { selectInsurance, setVehicleData } from "../features/insurance/InsuranceSlice";
 import ArrowIcon from "../components/Icons/ArrowIcon";
 import { SelectData } from "../types/dropdownOptions";
+import HeaderLayout from "../components/layout/HeaderLayout";
 
 const VehicleSchema = z.object({
     vehicleType: z.object({ id: z.number(), title: z.string() })
@@ -85,10 +86,9 @@ const VehiclePage: React.FC = () => {
 
     return (
         <>
-            <h1 className="text-center md:text-right text-2xl font-bold mb-16">بیمه شخص ثالث</h1>
+            <HeaderLayout>نوع و مدل خودروی خود را انتخاب کنید</HeaderLayout>
 
             <form className="space-y-6">
-                <p className="text-right">نوع و مدل خودروی خود را انتخاب کنید</p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-4">
 

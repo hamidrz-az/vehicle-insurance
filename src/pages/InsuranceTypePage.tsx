@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import InsuranceOption from "../components/UI/InsuranceOption";
+import InsuranceOption from "../components/common/InsuranceOption";
 import { useDispatch, useSelector } from "react-redux";
 import { selectInsurance, setInsuranceType } from "../features/insurance/InsuranceSlice";
 import { InsuranceType } from "../types/insuranceType";

@@ -4,12 +4,13 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { setInsuranceCompany } from "../features/insurance/InsuranceSlice";
-import InputField from "../components/UI/InputField";
+import InputField from "../components/common/InputField";
 import { useGetInsuranceCompaniesQuery } from "../api/insuranceCompaniesApi";
-import Button from "../components/UI/Button";
+import Button from "../components/common/Button";
 import ArrowIcon from "../components/Icons/ArrowIcon";
 import { useNavigate } from "react-router-dom";
 import { SelectData } from "../types/dropdownOptions";
+import HeaderLayout from "../components/layout/HeaderLayout";
 
 const CompanySchema = z.object({
     insuranceCompany: z.object({ id: z.number(), title: z.string() })
@@ -44,11 +45,9 @@ const InsuranceCompaniesPage: React.FC = () => {
 
     return (
         <div>
-            <h1 className="text-center md:text-right text-2xl font-bold mb-16">بیمه شخص ثالث</h1>
+            <HeaderLayout>شرکت بیمه گر قبلی خود را انتخاب کنید</HeaderLayout>
 
             <form className="space-y-6">
-                <p className="text-right">شرکت بیمه گر قبلی خود را انتخاب کنید</p>
-
                 <Controller
                     name="insuranceCompany"
                     control={control}

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from 'react-redux';
 import { selectFullName } from "../../features/auth/authSlice";
 import carGreen from "../../assets/img/car-green.svg"
-import logo from "../../assets/img/logo.svg"
+import logo from "/logo.svg"
 
 interface MainLayoutProps {
     children: React.ReactNode;
@@ -43,7 +43,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
             {/* Car Image and Yellow Section */}
             <div className="absolute bottom-0">
-                {/* Car Image */}
                 <div className="pl-8 md:pb-12">
                     <img
                         src={carGreen}
@@ -51,7 +50,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                         className="md:w-auto object-contain w-4/5"
                     />
                 </div>
-                {/* Yellow Background Section */}
                 <div
                     className="w-full bg-secondary md:hidden h-[100px]"
                 ></div>

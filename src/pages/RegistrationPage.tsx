@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../features/auth/authSlice";
-import Button from "../components/UI/Button";
-import InputField from "../components/UI/InputField";
+import Button from "../components/common/Button";
+import InputField from "../components/common/InputField";
 import { useNavigate } from "react-router-dom";
 
 const RegistrationSchema = z.object({
