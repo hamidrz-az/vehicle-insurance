@@ -5,11 +5,15 @@ interface ArrowProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   direction?: 'left' | 'right';
 }
 
-const ArrowIcon: React.FC<ArrowProps> = ({ direction = 'left', className = '', ...props }) => {
+const ArrowIcon: React.FC<ArrowProps> = ({
+  direction = 'left',
+  className = '',
+  ...props
+}) => {
   const rotationClass = direction === 'right' ? 'rotate-180' : '';
-  
+
   return (
-    <img 
+    <img
       src={arrowSvg}
       alt="Arrow"
       className={`inline-block ${rotationClass} ${className}`}

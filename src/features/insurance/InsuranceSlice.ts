@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { SelectData } from "../../types/dropdownOptions";
-import { InsuranceType } from "../../types/insuranceType";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
+import { SelectData } from '../../types/dropdownOptions';
+import { InsuranceType } from '../../types/insuranceType';
 
 type EntityModel = SelectData | null;
 
@@ -24,7 +24,7 @@ const initialState: InsuranceState = {
 };
 
 const insuranceSlice = createSlice({
-  name: "insurance",
+  name: 'insurance',
   initialState,
   reducers: {
     setInsuranceType: (state, action: PayloadAction<InsuranceType>) => {

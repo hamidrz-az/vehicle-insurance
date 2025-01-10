@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type UserRegistrationData = {
   firstName: string;
@@ -20,7 +20,7 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setUserData(state, action: PayloadAction<UserRegistrationData>) {

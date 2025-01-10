@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "../features/auth/authSlice";
-import insuranceReducer from "../features/insurance/InsuranceSlice";
-import { vehicleApi } from "../api/vehicleApi";
-import { insuranceCompaniesApi } from "../api/insuranceCompaniesApi";
-import { thirdDiscountApi } from "../api/discountsApi";
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from '../features/auth/authSlice';
+import insuranceReducer from '../features/insurance/InsuranceSlice';
+import { vehicleApi } from '../api/vehicleApi';
+import { insuranceCompaniesApi } from '../api/insuranceCompaniesApi';
+import { thirdDiscountApi } from '../api/discountsApi';
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +17,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(
       vehicleApi.middleware,
       insuranceCompaniesApi.middleware,
-      thirdDiscountApi.middleware,
+      thirdDiscountApi.middleware
     ),
 });
 

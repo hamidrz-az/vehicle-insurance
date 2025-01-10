@@ -10,7 +10,6 @@ import VehiclePage from './pages/VehiclePage';
 import InsuranceCompaniesPage from './pages/InsuranceCompaniesPage';
 import DiscountPage from './pages/DiscountPage';
 
-
 const App: React.FC = () => {
   return (
     <Provider store={store}>

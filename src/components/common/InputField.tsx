@@ -1,8 +1,8 @@
-import React from "react";
-import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
-import { SelectData } from "../../types/dropdownOptions";
+import React from 'react';
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
+import { SelectData } from '../../types/dropdownOptions';
 
-type InputType = "text" | "password" | "tel" | "select";
+type InputType = 'text' | 'password' | 'tel' | 'select';
 
 type InputFieldProps = {
   label?: string;
@@ -13,26 +13,45 @@ type InputFieldProps = {
   error?: Merge<FieldError, FieldErrorsImpl<SelectData>>;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const InputField = React.forwardRef<HTMLInputElement | HTMLSelectElement, InputFieldProps>(
-  ({ label, name, type = "text", placeholder, options, error, className, ...rest }, ref) => {
+const InputField = React.forwardRef<
+  HTMLInputElement | HTMLSelectElement,
+  InputFieldProps
+>(
+  (
+    {
+      label,
+      name,
+      type = 'text',
+      placeholder,
+      options,
+      error,
+      className,
+      ...rest
+    },
+    ref
+  ) => {
     const baseClasses =
-      "w-full text-right border-2 rounded-lg px-4 py-3 text-sm transition-colors bg-transparent";
-    const focusClasses = "focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary";
-    const errorClasses = error ? "border-red-500" : "border-gray-300";
-    const selectClasses = type === "select" ? "appearance-none pr-4 pl-8" : "";
+      'w-full text-right border-2 rounded-lg px-4 py-3 text-sm transition-colors bg-transparent';
+    const focusClasses =
+      'focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary';
+    const errorClasses = error ? 'border-red-500' : 'border-gray-300';
+    const selectClasses = type === 'select' ? 'appearance-none pr-4 pl-8' : '';
 
-    const classNames = `${baseClasses} ${focusClasses} ${errorClasses} ${selectClasses} ${className || ""}`;
+    const classNames = `${baseClasses} ${focusClasses} ${errorClasses} ${selectClasses} ${className || ''}`;
 
     return (
       <div className="flex flex-col mb-4 text-right">
         {label && (
-          <label htmlFor={name} className="text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor={name}
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
             {label}
           </label>
         )}
 
         <div className="relative">
-          {type === "select" && options ? (
+          {type === 'select' && options ? (
             <>
               <select
                 id={name}
@@ -44,7 +63,11 @@ const InputField = React.forwardRef<HTMLInputElement | HTMLSelectElement, InputF
               >
                 <option value="">{placeholder}</option>
                 {options.map(({ value, label }) => (
-                  <option key={value} value={value} className="flex items-center space-x-2">
+                  <option
+                    key={value}
+                    value={value}
+                    className="flex items-center space-x-2"
+                  >
                     {label}
                   </option>
                 ))}
@@ -74,14 +97,12 @@ const InputField = React.forwardRef<HTMLInputElement | HTMLSelectElement, InputF
           )}
         </div>
 
-        {error && (
-          <p className="text-xs text-red-500 mt-1">{error.message}</p>
-        )}
+        {error && <p className="text-xs text-red-500 mt-1">{error.message}</p>}
       </div>
     );
   }
 );
 
-InputField.displayName = "InputField";
+InputField.displayName = 'InputField';
 
 export default InputField;

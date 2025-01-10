@@ -1,1 +1,1 @@
-export type InsuranceType = "third-person" | "body" | null;
+export type InsuranceType = 'third-person' | 'body' | null;
