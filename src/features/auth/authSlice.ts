@@ -48,7 +48,7 @@ export const selectIsAuthenticated = (state: { auth: AuthState }) =>
   Boolean(state.auth.userData);
 export const selectFullName = (state: { auth: AuthState }) => {
   const userData = state.auth.userData;
-  return userData ? `${userData.lastName} ${userData.firstName}` : null;
+  return userData ? `${userData.firstName} ${userData.lastName}` : null;
 };
 
 export default authSlice.reducer;

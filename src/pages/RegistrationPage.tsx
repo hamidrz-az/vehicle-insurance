@@ -37,9 +37,11 @@ const RegistrationPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
+    trigger, // Allows manual validation
   } = useForm<RegistrationFormValues>({
     resolver: zodResolver(RegistrationSchema),
+    mode: 'onTouched', // Validate fields when they are touched
   });
 
   const onSubmit = (data: RegistrationFormValues) => {
@@ -58,16 +60,20 @@ const RegistrationPage: React.FC = () => {
           <InputField
             type="text"
             placeholder="نام"
-            error={errors.firstName}
-            {...register('firstName')}
+            error={touchedFields.firstName ? errors.firstName : undefined} // Show error only after touch
+            {...register('firstName', {
+              onBlur: () => trigger('firstName'), // Trigger validation on blur
+            })}
           />
         </div>
         <div className="sm:order-first">
           <InputField
             type="text"
             placeholder="نام خانوادگی"
-            error={errors.lastName}
-            {...register('lastName')}
+            error={touchedFields.lastName ? errors.lastName : undefined}
+            {...register('lastName', {
+              onBlur: () => trigger('lastName'),
+            })}
           />
         </div>
       </div>
@@ -75,17 +81,24 @@ const RegistrationPage: React.FC = () => {
       <InputField
         placeholder="شماره موبایل"
         type="tel"
-        error={errors.phoneNumber}
-        {...register('phoneNumber')}
+        error={touchedFields.phoneNumber ? errors.phoneNumber : undefined}
+        {...register('phoneNumber', {
+          onBlur: () => trigger('phoneNumber'),
+        })}
       />
 
       <InputField
         type="password"
         placeholder="رمز عبور"
-        {...register('password')}
+        error={touchedFields.password ? errors.password : undefined}
+        {...register('password', {
+          onBlur: () => trigger('password'),
+        })}
       />
 
-      <Button type="submit">ثبت نام</Button>
+      <Button type="submit" disabled={Object.keys(errors).length > 0}>
+        ثبت نام
+      </Button>
     </form>
   );
 };

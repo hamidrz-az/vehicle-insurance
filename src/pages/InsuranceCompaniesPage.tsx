@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { setInsuranceCompany } from '../features/insurance/InsuranceSlice';
+import {
+  setInsuranceCompany,
+  selectInsurance,
+} from '../features/insurance/InsuranceSlice';
 import InputField from '../components/common/InputField';
 import { useGetInsuranceCompaniesQuery } from '../api/insuranceCompaniesApi';
 import Button from '../components/common/Button';
@@ -25,6 +28,8 @@ type InsuranceCompanyValues = z.infer<typeof CompanySchema>;
 const InsuranceCompaniesPage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { insuranceCompany: storedInsuranceCompany } =
+    useSelector(selectInsurance);
 
   const {
     data: insuranceCompanies,
@@ -40,7 +45,7 @@ const InsuranceCompaniesPage: React.FC = () => {
     resolver: zodResolver(CompanySchema),
     mode: 'onChange',
     defaultValues: {
-      insuranceCompany: { id: 0, title: '' },
+      insuranceCompany: storedInsuranceCompany || { id: 0, title: '' },
     },
   });
 
@@ -66,19 +71,16 @@ const InsuranceCompaniesPage: React.FC = () => {
               placeholder="شرکت بیمه گر قبلی"
               options={
                 insuranceCompanies?.map((company: SelectData) => ({
-                  value: company.id,
+                  value: JSON.stringify(company),
                   label: company.title,
                 })) || []
               }
               {...field}
               onChange={(e) => {
-                const selectedCompany = insuranceCompanies?.find(
-                  (company: SelectData) =>
-                    company.id === parseInt(e.target.value)
-                );
-                field.onChange(selectedCompany); // Pass the entire company object when selected
+                const selectedCompany = JSON.parse(e.target.value);
+                field.onChange(selectedCompany);
               }}
-              value={field.value ? field.value.id : ''}
+              value={JSON.stringify(field.value)}
               disabled={isLoading || !!insuranceCompaniesError}
             />
           )}
