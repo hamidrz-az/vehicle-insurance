@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type UserRegistrationData = {
   firstName: string;
@@ -20,7 +20,7 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setUserData(state, action: PayloadAction<UserRegistrationData>) {
@@ -41,14 +41,14 @@ const authSlice = createSlice({
   },
 });
 
-export const {
-  setUserData,
-  clearUserData,
-  setLoading,
-  setError,
-  clearError,
-} = authSlice.actions;
+export const { setUserData, clearUserData, setLoading, setError, clearError } =
+  authSlice.actions;
 
-export const selectIsAuthenticated = (state: { auth: AuthState }) => Boolean(state.auth.userData);
+export const selectIsAuthenticated = (state: { auth: AuthState }) =>
+  Boolean(state.auth.userData);
+export const selectFullName = (state: { auth: AuthState }) => {
+  const userData = state.auth.userData;
+  return userData ? `${userData.lastName} ${userData.firstName}` : null;
+};
 
 export default authSlice.reducer;

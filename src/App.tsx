@@ -1,16 +1,14 @@
-// File: App.tsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './app/store'; // Redux store
-// import HomePage from './pages/HomePage';
-// import VehiclePage from './pages/VehiclePage';
-// import InsuranceCompaniesPage from './pages/InsuranceCompaniesPage';
-// import ThirdDiscountPage from './pages/ThirdDiscountPage';
+import { store } from './app/store';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import MainLayout from './components/Layout/MainLayout';
 import RegistrationPage from './pages/RegistrationPage';
 import InsuranceTypePage from './pages/InsuranceTypePage';
+import VehiclePage from './pages/VehiclePage';
+import InsuranceCompaniesPage from './pages/InsuranceCompaniesPage';
+import DiscountPage from './pages/DiscountPage';
 
 
 const App: React.FC = () => {
@@ -28,30 +26,30 @@ const App: React.FC = () => {
                 </PrivateRoute>
               }
             />
-            {/* <Route
-              path="/vehicles"
+            <Route
+              path="/vehicle"
               element={
                 <PrivateRoute>
                   <VehiclePage />
                 </PrivateRoute>
               }
-            /> */}
-            {/* <Route
-              path="/insurance-companies"
+            />
+            <Route
+              path="/companies"
               element={
                 <PrivateRoute>
                   <InsuranceCompaniesPage />
                 </PrivateRoute>
               }
-            /> */}
-            {/* <Route
-              path="/third-discounts"
+            />
+            <Route
+              path="/discounts"
               element={
                 <PrivateRoute>
-                  <ThirdDiscountPage />
+                  <DiscountPage />
                 </PrivateRoute>
               }
-            /> */}
+            />
           </Routes>
         </MainLayout>
       </Router>

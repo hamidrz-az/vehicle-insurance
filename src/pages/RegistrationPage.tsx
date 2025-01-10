@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useDispatch } from 'react-redux';
-import { setUserData } from '../features/auth/authSlice'; 
+import { useDispatch } from "react-redux";
+import { setUserData } from "../features/auth/authSlice";
+import Button from "../components/UI/Button";
+import InputField from "../components/UI/InputField";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationSchema = z.object({
     firstName: z
@@ -30,72 +33,57 @@ type RegistrationFormValues = z.infer<typeof RegistrationSchema>;
 
 const RegistrationPage: React.FC = () => {
     const dispatch = useDispatch();
-    const { register, handleSubmit, formState } = useForm<RegistrationFormValues>({
+    const navigate = useNavigate();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<RegistrationFormValues>({
         resolver: zodResolver(RegistrationSchema),
     });
 
     const onSubmit = (data: RegistrationFormValues) => {
-        dispatch(setUserData(data)); // Save user data to Redux
-        window.location.href = "/"; // Redirect after successful registration
+        dispatch(setUserData(data));
+        navigate("/");
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-lg mx-auto">
-            <h1 className="text-center text-2xl font-bold">ثبت نام</h1>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex flex-col">
-                    <input
-                        {...register("firstName")}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <h1 className="text-center md:text-right text-2xl font-bold mb-4">ثبت نام</h1>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-4">
+                <div className="sm:order-last">
+                    <InputField
+                        type="text"
                         placeholder="نام"
-                        className="border border-gray-300 rounded-md p-2 text-right"
+                        error={errors.firstName}
+                        {...register("firstName")}
                     />
-                    {formState.errors.firstName && (
-                        <p className="text-red-500 text-sm">{formState.errors.firstName.message}</p>
-                    )}
                 </div>
-
-                <div className="flex flex-col">
-                    <input
-                        {...register("lastName")}
+                <div className="sm:order-first">
+                    <InputField
+                        type="text"
                         placeholder="نام خانوادگی"
-                        className="border border-gray-300 rounded-md p-2 text-right"
+                        error={errors.lastName}
+                        {...register("lastName")}
                     />
-                    {formState.errors.lastName && (
-                        <p className="text-red-500 text-sm">{formState.errors.lastName.message}</p>
-                    )}
                 </div>
             </div>
 
-            <div className="flex flex-col">
-                <input
-                    {...register("phoneNumber")}
-                    placeholder="شماره موبایل"
-                    className="border border-gray-300 rounded-md p-2 text-right"
-                />
-                {formState.errors.phoneNumber && (
-                    <p className="text-red-500 text-sm">{formState.errors.phoneNumber.message}</p>
-                )}
-            </div>
+            <InputField
+                placeholder="شماره موبایل"
+                type="tel"
+                error={errors.phoneNumber}
+                {...register("phoneNumber")}
+            />
 
-            <div className="flex flex-col">
-                <input
-                    {...register("password")}
-                    type="password"
-                    placeholder="رمز عبور"
-                    className="border border-gray-300 rounded-md p-2 text-right"
-                />
-                {formState.errors.password && (
-                    <p className="text-red-500 text-sm">{formState.errors.password.message}</p>
-                )}
-            </div>
+            <InputField
+                type="password"
+                placeholder="رمز عبور"
+                {...register("password")}
+            />
 
-            <button
-                type="submit"
-                className="w-full sm:w-auto bg-green-500 text-white rounded-md py-2 hover:bg-green-600 transition mt-4 sm:ml-auto"
-            >
-                ثبت نام
-            </button>
+            <Button type="submit">ثبت نام</Button>
         </form>
     );
 };
